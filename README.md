@@ -36,9 +36,10 @@ function App() {
   };
 
   return (
-    <SnackbarProvider>
+    <>
+      <SnackbarProvider/> // check API for options
       <button onClick={handleClick}>Show Snackbar</button>
-    </SnackbarProvider>
+    </>
   );
 }
 
@@ -68,9 +69,14 @@ The `SnackbarProvider` component is used to wrap your application and provide th
 | maxSnackbars    | number  | Maximum number of snackbars to show | 3       |
 | autoHideDuration| number  | Duration to auto-hide the snackbar  | 3000    |
 | icon            | boolean | hide the icon in the snackbar       | true    |
+| theme           | string  | Theme of the snackbar ('dark' or 'light') | 'light' |
+| anchorOrigin        | object  | Position of the snackbar             | { vertical: 'bottom', horizontal: 'left' } |
+
+> **Note:** The `theme` option is based on the Material-UI (MUI) built in theme.
 
 #### TODO
-- Add a custom hook `useSnackbar`
+- Custom hook support
+- custom themes support
 
 ## Connect with Us
 Feel free to reach out.

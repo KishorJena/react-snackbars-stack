@@ -1,14 +1,20 @@
-import React, { useEffect, useRef, useReducer } from 'react';
+import { Alert, Portal, ThemeProvider } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
-import { Alert, Portal } from '@mui/material';
-import { SlideTransition } from '../transition/SlideTransition';
+import React, { useEffect, useReducer, useRef } from 'react';
+import { MAX_SNACKBARS, SNACKBAR_SPACING } from '../constants';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
-import { MAX_SNACKBARS, SNACKBAR_SPACING } from '../constants';
+import { darkTheme, lightTheme } from '../theme';
+import { SlideTransition } from '../transition/SlideTransition';
 import { SnackbarAction, SnackbarItem, SnackbarProviderProps } from '../types';
 
 // Main component
-export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({ anchorOrigin, maxSnackbars = MAX_SNACKBARS, icon }) => {
+export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({ 
+  anchorOrigin = { vertical: 'bottom', horizontal: 'left' }, 
+  maxSnackbars = MAX_SNACKBARS, 
+  icon, 
+  theme 
+}) => {
   const [snackbars, dispatch] = useReducer((state: SnackbarItem[], action: SnackbarAction) => snackbarReducer(state, action, maxSnackbars), []);
   const instanceId = useRef(Date.now());
 
@@ -40,50 +46,53 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({ anchorOrigin
       dispatch({ type: 'REMOVE_SNACKBAR', payload: id });
     }, 150);
   };
-
+  
   return (
+    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+
     <Portal>
       <div 
         data-snackbar-provider={instanceId.current}
         style={{ 
-          position: 'fixed', 
-          bottom: 0, 
-          left: 0, 
+          // position: 'fixed', 
+          // bottom: 0, 
+          // left: 0, 
           zIndex: 9999,
           pointerEvents: 'none' ,
         }}
       >
         {snackbars.map((snackbar, index) => (
-          <Snackbar
+            <Snackbar
             key={snackbar.id}
             open={snackbar.open}
             TransitionComponent={SlideTransition}
             autoHideDuration={snackbar.duration}
             onClose={handleClose(snackbar.id)}
-            anchorOrigin={anchorOrigin || { vertical: 'bottom', horizontal: 'left' }}
+            anchorOrigin={anchorOrigin}
             sx={{
               '& .MuiSnackbar-root': {
-                position: 'static',
+              position: 'static',
               },
               pointerEvents: 'auto',
               transition: 'all 0.08s ease-in-out',
-              bottom: `${(index * SNACKBAR_SPACING) + 24}px !important`,
+              [anchorOrigin.vertical]: `${(index * SNACKBAR_SPACING) + 24}px !important`,
             }}
-          >
+            >
             <Alert
               variant="filled"
               onClose={handleClose(snackbar.id)}
               severity={snackbar.severity}
               sx={{ 
-                width: '100%',
+              width: '100%',
               }}
               icon={icon === true ? undefined : icon}
             >
               {snackbar.message}
             </Alert>
-          </Snackbar>
+            </Snackbar>
         ))}
       </div>
     </Portal>
+    </ThemeProvider>
   );
 };

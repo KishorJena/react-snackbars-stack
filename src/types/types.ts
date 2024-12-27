@@ -18,6 +18,7 @@ export interface SnackbarProviderProps {
   maxSnackbars?: number;
   preventDuplicate?: boolean;
   icon?: boolean;
+  theme?: 'light' | 'dark';
 }
 
 export type SnackbarAction = 

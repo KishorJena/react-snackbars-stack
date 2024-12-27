@@ -3,24 +3,45 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
 // import { Thing } from '../.';
+import { Typography, Button, Alert,createTheme,  ThemeProvider } from '@mui/material';
+
 // import { SnackbarProvider, enqueueSnackbar } from '../.';
 import { SnackbarProvider, enqueueSnackbar } from '../src';
-import { Typography, Button, Alert } from '@mui/material';
 
-const DURATION = 1500
-
+const DURATION = 5500
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark'
+  }
+})
+const lightTheme = createTheme({ 
+  palette: {
+    mode: 'light'
+  }
+})
 const App = () => {
   console.log('App.tsx Run')
   const handleCLick = () => {
     enqueueSnackbar({ 
       message: 'This is a snackbar message!', 
       severity:'info',
-      duration: 1500, 
+      duration: DURATION, 
       preventDuplicate: false 
     })
   }
   return (
+    <ThemeProvider theme={lightTheme} >
+
     <div style={{ width:'100vw', height: '100vh', backgroundColor: '#333', color: '#fff' }}>
+     
+    <SnackbarProvider 
+      maxSnackbars={4} 
+      theme={'light'} 
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    />
+    {/* <SnackbarProvider maxSnackbars={4} theme={'light'}/> */}
+
      <Button
         color='info'
         variant={'contained'}
@@ -78,9 +99,10 @@ const App = () => {
         error
       </Button>
  
-      <SnackbarProvider maxSnackbars={4} icon={true}/>
+
 
     </div>
+     </ThemeProvider>
   );
 };
 
