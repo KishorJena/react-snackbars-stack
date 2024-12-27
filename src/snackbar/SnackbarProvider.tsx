@@ -54,9 +54,9 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
       <div 
         data-snackbar-provider={instanceId.current}
         style={{ 
-          // position: 'fixed', 
-          // bottom: 0, 
-          // left: 0, 
+          position: 'fixed', 
+          [anchorOrigin.vertical]: 0, 
+          [anchorOrigin.horizontal]: 0, 
           zIndex: 9999,
           pointerEvents: 'none' ,
         }}
@@ -83,7 +83,7 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
               onClose={handleClose(snackbar.id)}
               severity={snackbar.severity}
               sx={{ 
-              width: '100%',
+               width: '100%',
               }}
               icon={icon === true ? undefined : icon}
             >
