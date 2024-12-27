@@ -1,9 +1,9 @@
 # React Snackbars Stack
 A customizable and easy-to-use snackbar (toast) notification stack for React applications.
 
-![alt text](<Frame 4.png>)
+![alt text](./Frame%204.png)
 
-![alt text](image.png)
+![alt text](./image.png)
 
 ## Installation
 
@@ -19,7 +19,7 @@ yarn add react-snackbars-stack
 
 Import the `SnackbarProvider` and wrap your application with it. Use the `useSnackbar` hook to show snackbars.
 
-> **🚀 Important Note::** You don't need to wrap your entire application with the SnackbarProvider context. You can use it directly in any component by placing it inside the render method, such as the return statement in a function component or the render method in a class component
+> **🚀 Important Note:** You don't need to wrap your entire application with the SnackbarProvider context. You can use it directly in any component by placing it inside the render method, such as the return statement in a function component or the render method in a class component
  
 ```jsx
 import React from 'react';
@@ -50,10 +50,8 @@ export default App;
 
 ### `enqueueSnackbar` Method
 
-The `enqueueSnackbar` method is used to show a snackbar notification.
+The `enqueueSnackbar` method is used to show a snackbar notification. If there are already some snackbars being displayed, it adds the snackbar above or below the existing snackbars in the stack.
 
-| Option   | Type   | Description                  | Default |
-|----------|--------|------------------------------|---------|
 | Option          | Type    | Description                          | Default |
 |-----------------|---------|--------------------------------------|---------|
 | message         | string  | The message to display               | -       |
@@ -64,15 +62,14 @@ The `enqueueSnackbar` method is used to show a snackbar notification.
 ### `SnackbarProvider` Component
 
 The `SnackbarProvider` component is used to wrap your application and provide the snackbar context.
+
 | Option          | Type    | Description                        | Default |
 |-----------------|---------|------------------------------------|---------|
 | maxSnackbars    | number  | Maximum number of snackbars to show | 3       |
 | autoHideDuration| number  | Duration to auto-hide the snackbar  | 3000    |
 | icon            | boolean | hide the icon in the snackbar       | true    |
 | theme           | string  | Theme of the snackbar ('dark' or 'light') | 'light' |
-| anchorOrigin        | object  | Position of the snackbar             | { vertical: 'bottom', horizontal: 'left' } |
-
-> **Note:** The `theme` option is based on the Material-UI (MUI) built in theme.
+| anchorOrigin    | object  | Position of the snackbar            | { vertical: 'bottom', horizontal: 'left' } |
 
 #### TODO
 - Custom hook support
