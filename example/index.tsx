@@ -3,7 +3,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
 // import { Thing } from '../.';
-import { SnackbarProvider, enqueueSnackbar } from '../.';
+// import { SnackbarProvider, enqueueSnackbar } from '../.';
+import { SnackbarProvider, enqueueSnackbar } from '../src';
 import { Typography, Button, Alert } from '@mui/material';
 
 const DURATION = 1500
@@ -77,20 +78,8 @@ const App = () => {
         error
       </Button>
  
-      <SnackbarProvider maxSnackbars={4} />
+      <SnackbarProvider maxSnackbars={4} icon={true}/>
 
-      <Alert
-              variant="filled"
-              
-              severity={'warning'}
-              sx={{ 
-                width: '100%',
-                color: 'white',
-              }}
-
-            >
-              🔼123 
-            </Alert>
     </div>
   );
 };

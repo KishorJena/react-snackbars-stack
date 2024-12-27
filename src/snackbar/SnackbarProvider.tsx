@@ -76,11 +76,10 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({ anchorOrigin
               severity={snackbar.severity}
               sx={{ 
                 width: '100%',
-                color: 'white',
               }}
-              icon={icon}
+              icon={icon === true ? undefined : icon}
             >
-              🔼123 {snackbar.message && snackbar.message.toUpperCase()}
+              {snackbar.message}
             </Alert>
           </Snackbar>
         ))}

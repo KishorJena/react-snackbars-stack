@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -35,6 +35,35 @@
   },
   "name": "react-snackbars-stack",
   "author": "Kishor Jena",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KishorJena/react-snackbars-stack.git"
+  },
+  "homepage": "https://github.com/KishorJena/react-snackbars-stack#readme",
+  "bugs": {
+    "url": "https://github.com/KishorJena/react-snackbars-stack/issues"
+  },
+  "keywords": [
+    "react",
+    "snackbar",
+    "stack",
+    "notification",
+    "toast",
+    "alert",
+    "notistack",
+    "enqueueSnackbar",
+    "snackbarprovider",
+    "useSnackbar",
+    "message",
+    "mui",
+    "material-ui",
+    "material design",
+    "styled-components",
+    "typescript",
+    "javsacript",
+    "ksr",
+    "CracketKSR"
+  ],
   "module": "dist/react-snackbars-stack.esm.js",
   "size-limit": [
     {
