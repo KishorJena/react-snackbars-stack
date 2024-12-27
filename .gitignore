@@ -4,6 +4,8 @@ node_modules
 .cache
 dist
 /example/.parcel-cache
+example/.parcel-cache/
 .parcel-cache
 .parcel-cache/
+**/parcel-cache/
 example/.parcel-cache/
