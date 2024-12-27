@@ -11,6 +11,9 @@
     "react-app-polyfill": "^1.0.0"
   },
   "alias": {
+    "@mui/material": "../node_modules/@mui/material",
+    "@emotion/react": "../node_modules/@emotion/react",
+    "@emotion/styled": "../node_modules/@emotion/styled",
     "react": "../node_modules/react",
     "react-dom": "../node_modules/react-dom",
     "scheduler/tracing": "../node_modules/scheduler/tracing-profiling"
