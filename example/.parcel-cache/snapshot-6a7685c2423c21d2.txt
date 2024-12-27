@@ -32,7 +32,7 @@
 127C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\caniuse-lite\data\features\gyroscope.js133796124536920000 0
 123C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\core-js\es\function\virtual\bind.js133796170486330000 0
 116C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\domutils\lib\manipulation.js133796722339110000 0
-79C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\dist133797571533662797 1
+79C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\dist133797589302280376 1
 101C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\color-convert133797552520330777 1
 135C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\@parcel\watcher\src\shared\BruteForceBackend.hh133796721645820000 0
 120C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\htmlnano\lib\presets\ampSafe.cjs133796721708690000 0
@@ -65,7 +65,7 @@
 115C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\type-fest\source\basic.d.ts133579230949370000 0
 108C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\htmlnano\index.d.cts133796721708690000 0
 150C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\htmlnano\docs\versioned_docs\version-2.0.0\010-introduction.md133796721708690000 0
-84C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\index.tsx133797571531522137 0
+84C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\index.tsx133797589295492819 0
 97C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\term-size133797552521495713 1
 87C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules133797552604825083 1
 121C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\domelementtype\lib\index.d.ts.map133796722343410000 0
@@ -3019,7 +3019,7 @@
 120C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\core-js\full\array\find-index.js133796170486330000 0
 121C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\core-js\stable\instance\concat.js133796170486330000 0
 116C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\core-js\stable\symbol\for.js133796170486330000 0
-97C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\dist\index.6fa4ea68.js133797571533521117 0
+97C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\dist\index.6fa4ea68.js133797589301999079 0
 135C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\core-js\modules\esnext.string.at-alternative.js133796170486330000 0
 114C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\lightningcss\node\ast.d.ts133796721707040000 0
 117C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\lightningcss\node\ast.js.flow133796721707040000 0
@@ -8451,5 +8451,5 @@
 103C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\.bin\semver.cmd133797552588820742 0
 105C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\.bin\tsserver.cmd133797552588994782 0
 119C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\node_modules\.bin\update-browserslist-db.cmd133797552588870752 0
-101C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\dist\index.6fa4ea68.js.map133797571533652778 0
-90C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\dist\index.html133797557313130071 0
+101C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\dist\index.6fa4ea68.js.map133797589302260353 0
+90C:\Users\ksrje\OneDrive\Documents\my modules\react-snackbars-stack\example\dist\index.html133797574823415173 0
