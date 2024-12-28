@@ -1,18 +1,20 @@
 import { Alert, Portal, ThemeProvider, Zoom } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
-import React, { useEffect, useReducer, useRef } from 'react';
+import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import { MAX_SNACKBARS, SNACKBAR_SPACING } from '../constants';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
 import { darkTheme, lightTheme } from '../theme';
 import { Transition } from '../transition/Transition';
-import { SnackbarAction, SnackbarItem, SnackbarProviderProps } from '../types';
+import { SnackbarAction, SnackbarConfig, SnackbarItem, SnackbarProviderProps } from '../types';
+
 import { 
   Slide, SlideProps, 
   Grow, GrowProps, 
   Fade, FadeProps ,
   Zoom, ZoomProps
 } from '@mui/material';
+import { SnackbarContext } from '../context';
 
 type Direction = 'left' | 'right' | 'up' | 'down';
 
@@ -40,9 +42,11 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
   icon, 
   theme,
   transitionType = 'slide',
+  children
 }) => {
   const [snackbars, dispatch] = useReducer((state: SnackbarItem[], action: SnackbarAction) => snackbarReducer(state, action, maxSnackbars), []);
   const instanceId = useRef(Date.now());
+
 
   useEffect(() => {
     // Check for multiple instances
@@ -54,6 +58,7 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
     // Setup event listener
     eventEmitter.setActive(true);
     const unsubscribe = eventEmitter.subscribe((newSnackbar) => {
+      console.log("EVENT | newSnackbar adding paylod:", newSnackbar);
       dispatch({ type: 'ADD_SNACKBAR', payload: newSnackbar });
     });
 
@@ -68,6 +73,7 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
     if (reason === 'clickaway') return;
 
     dispatch({ type: 'CLOSE_SNACKBAR', payload: id });
+
     setTimeout(() => {
       dispatch({ type: 'REMOVE_SNACKBAR', payload: id });
     }, 150);
@@ -76,54 +82,78 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
   const SnakbarTransition = transitionComponents[transitionType] || transitionComponents.default;
   const transitionProps = transitionType === 'slide' ? { direction: oppositeDirections[anchorOrigin.horizontal] } : {};
 
-  return (
-    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+  const enqueueSnackbar = useCallback(({ 
+    message, 
+    severity = 'info', 
+    duration = 5000,
+    preventDuplicate = true
+  }: SnackbarConfig): void => {
+    const payload = {
+      id: Date.now(),
+      message,
+      severity,
+      duration,
+      open: true,
+      preventDuplicate: preventDuplicate 
+    };
+    dispatch({ type: 'ADD_SNACKBAR', payload });
+  }, []);
+  
 
-    <Portal>
-      <div 
-        data-snackbar-provider={instanceId.current}
-        style={{ 
-          position: 'fixed', 
-          [anchorOrigin.vertical]: 0, 
-          [anchorOrigin.horizontal]: 0, 
-          zIndex: 9999,
-          pointerEvents: 'none' ,
-        }}
-      >
-        {snackbars.map((snackbar, index) => (
-            <Snackbar
-            key={snackbar.id}
-            open={snackbar.open}
-            // TransitionComponent={props=> <Transition {...props} transitionType='slide' anchorOrigin={anchorOrigin} />}
-            TransitionComponent={SnakbarTransition}
-            TransitionProps={transitionProps}
-            autoHideDuration={snackbar.duration}
-            onClose={handleClose(snackbar.id)}
-            anchorOrigin={anchorOrigin}
-            sx={{
-              '& .MuiSnackbar-root': {
-                position: 'static',
-              },
-              pointerEvents: 'auto',
-              transition: 'all 0.08s ease-in-out',
-              [anchorOrigin.vertical]: `${(index * SNACKBAR_SPACING) + 24}px !important`,
+  return (
+    <SnackbarContext.Provider value={{ enqueueSnackbar  }}>
+
+      {children}
+
+      <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+
+        <Portal>
+          <div 
+            data-snackbar-provider={instanceId.current}
+            style={{ 
+              position: 'fixed', 
+              [anchorOrigin.vertical]: 0, 
+              [anchorOrigin.horizontal]: 0, 
+              zIndex: 9999,
+              pointerEvents: 'none' ,
             }}
-            >
-            <Alert
-              variant="filled"
-              onClose={handleClose(snackbar.id)}
-              severity={snackbar.severity}
-              sx={{ 
-               width: '100%',
-              }}
-              icon={icon === true ? undefined : icon}
-            >
-              {snackbar.message}
-            </Alert>
-            </Snackbar>
-        ))}
-      </div>
-    </Portal>
-    </ThemeProvider>
+          >
+            {snackbars.map((snackbar, index) => (
+                <Snackbar
+                key={snackbar.id}
+                open={snackbar.open}
+                // TransitionComponent={props=> <Transition {...props} transitionType='slide' anchorOrigin={anchorOrigin} />}
+                TransitionComponent={SnakbarTransition}
+                TransitionProps={transitionProps}
+                autoHideDuration={snackbar.duration}
+                onClose={handleClose(snackbar.id)}
+                anchorOrigin={anchorOrigin}
+                sx={{
+                  '& .MuiSnackbar-root': {
+                    position: 'static',
+                  },
+                  pointerEvents: 'auto',
+                  transition: 'all 0.08s ease-in-out',
+                  [anchorOrigin.vertical]: `${(index * SNACKBAR_SPACING) + 24}px !important`,
+                }}
+                >
+                <Alert
+                  variant="filled"
+                  onClose={handleClose(snackbar.id)}
+                  severity={snackbar.severity}
+                  sx={{ 
+                  width: '100%',
+                  }}
+                  icon={icon === true ? undefined : icon}
+                >
+                  {snackbar.message}
+                </Alert>
+                </Snackbar>
+            ))}
+          </div>
+        </Portal>
+
+      </ThemeProvider>
+    </SnackbarContext.Provider>
   );
 };

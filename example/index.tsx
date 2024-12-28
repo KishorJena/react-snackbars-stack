@@ -6,14 +6,16 @@ import { createRoot } from 'react-dom/client';
 import { Typography, Button, Alert,createTheme,  ThemeProvider } from '@mui/material';
 
 // import { SnackbarProvider, enqueueSnackbar } from '../.';
-import { SnackbarProvider, enqueueSnackbar } from '../src';
+import { SnackbarProvider,  useSnackbar } from '../src';
 
 const DURATION = 5500
+
 const darkTheme = createTheme({
   palette: {
     mode: 'dark'
   }
 })
+
 const lightTheme = createTheme({ 
   palette: {
     mode: 'light'
@@ -21,7 +23,8 @@ const lightTheme = createTheme({
 })
 
 const App = () => {
-  console.log('App.tsx Run')
+  const {enqueueSnackbar} = useSnackbar();
+  console.log('App.tsx Run ')
   const handleCLick = () => {
     enqueueSnackbar({ 
       message: 'This is a snackbar message!', 
@@ -35,12 +38,12 @@ const App = () => {
 
     <div style={{ width:'100vw', height: '100vh', backgroundColor: '#333', color: '#fff' }}>
      
-    <SnackbarProvider 
+    {/* <SnackbarProvider 
       maxSnackbars={4} 
       theme={'light'} 
       anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
       transitionType={'fade'}
-    />
+    /> */}
 
      <Button
         color='info'
@@ -103,13 +106,26 @@ const App = () => {
 
     </div>
      </ThemeProvider>
+
   );
 };
 
+const App2 = () => {
+  return (
+    <SnackbarProvider 
+      maxSnackbars={4} 
+      theme={'dark'} 
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transitionType={'fade'}
+    >
+      <App />
+    </SnackbarProvider>
+  )
+}
 const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = createRoot(rootElement); // Create a root
-  root.render(<App />); // Use root.render
+  root.render(<App2 />); // Use root.render
 } else {
   console.error("Root element not found");
 }
