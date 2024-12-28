@@ -5,7 +5,7 @@ import { MAX_SNACKBARS, SNACKBAR_SPACING } from '../constants';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
 import { darkTheme, lightTheme } from '../theme';
-import { SnackbarAction, SnackbarConfig, SnackbarItem, SnackbarProviderProps } from '../types';
+import { AnchorOrigin, SnackbarAction, SnackbarConfig, SnackbarItem, SnackbarProviderProps } from '../types';
 
 import {
   Fade,
@@ -14,6 +14,7 @@ import {
   Zoom
 } from '@mui/material';
 import { SnackbarContext } from '../context';
+import { TransitionProps } from '@mui/material/transitions';
 
 type Direction = 'left' | 'right' | 'up' | 'down';
 
@@ -26,12 +27,19 @@ const oppositeDirections: { [key in Direction]: Direction } = {
 
 type TransitionType = 'slide' | 'grow' | 'fade' | 'zoom' | 'default';
 
-const transitionComponents: { [key in TransitionType]: React.ComponentType<any> } = {
-  'slide': Slide,
-  'grow': Grow,
-  'fade': Fade,
-  'zoom': Zoom,
-  'default': Slide,
+const transitionComponents = (transitionType: TransitionType, anchorOrigin: AnchorOrigin): React.ComponentType<any> => {
+  switch (transitionType) {
+    case 'slide':
+      return (props: TransitionProps & { children: React.ReactElement }) => <Slide {...props} direction={oppositeDirections[anchorOrigin.horizontal]} />;
+    case 'grow':
+      return Grow;
+    case 'fade':
+      return Fade;
+    case 'zoom':
+      return Zoom;
+    default:
+      return Slide;
+  }
 };
 
 // Main component
@@ -78,8 +86,8 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
     }, 150);
   };
   
-  const SnakbarTransition = transitionComponents[transitionType] || transitionComponents.default;
-  const transitionProps = transitionType === 'slide' ? { direction: oppositeDirections[anchorOrigin.horizontal] } : {};
+  const SnakbarTransition = transitionComponents(transitionType, anchorOrigin);
+  // const transitionProps = transitionType === 'slide' ? { direction: oppositeDirections[anchorOrigin.horizontal]} : {};
 
   const enqueueSnackbar = useCallback(({ 
     message, 
@@ -123,7 +131,7 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
                 open={snackbar.open}
                 // TransitionComponent={props=> <Transition {...props} transitionType='slide' anchorOrigin={anchorOrigin} />}
                 TransitionComponent={SnakbarTransition}
-                TransitionProps={transitionProps}
+                // TransitionProps={transitionProps}
                 autoHideDuration={snackbar.duration}
                 onClose={handleClose(snackbar.id)}
                 anchorOrigin={anchorOrigin}
