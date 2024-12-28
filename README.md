@@ -16,17 +16,16 @@ yarn add react-snackbars-stack
 ```
 
 ## Usage
-
+#### Option 1: Direct use
 Import the `SnackbarProvider` and wrap your application with it. Use the `useSnackbar` hook to show snackbars.
 
 > **🚀 Important Note:** You don't need to wrap your entire application with the SnackbarProvider context. You can use it directly in any component by placing it inside the render method, such as the return statement in a function component or the render method in a class component
- 
+
 ```jsx
 import React from 'react';
-import { SnackbarProvider, useSnackbar } from 'react-snackbars-stack';
+import { SnackbarProvider, enqueueSnackbar } from 'react-snackbars-stack';
 
 function App() {
-  const { enqueueSnackbar } = useSnackbar();
 
   const handleClick = () => {
     enqueueSnackbar({ 
@@ -45,7 +44,38 @@ function App() {
 
 export default App;
 ```
+#### Option 2 : hook
+Wrap your Root App or specific parent app with context Provider. Import hook in child component to use method to show snackbars.
+```jsx
+import React from 'react';
+import { SnackbarProvider, useSnackbar } from 'react-snackbars-stack';
 
+function MyComponent() {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClick = () => {
+    enqueueSnackbar({ 
+      message: 'This is a snackbar message!', 
+      severity: 'success'
+    });
+  };
+
+  return (
+    <>
+      <button onClick={handleClick}>
+        Show Snackbar
+      </button>
+    </>
+  );
+}
+
+const App = () => (
+  <SnackbarProvider>
+    <MyComponent/>
+  </SnackbarProvider>
+)
+export default App;
+```
 ## API
 
 ### `enqueueSnackbar` Method
@@ -73,8 +103,10 @@ The `SnackbarProvider` component is used to wrap your application and provide th
 | transitionType  | string  | Transition type for the snackbar ('slide', 'grow', 'fade', 'zoom') | 'slide' |
 
 #### TODO
-- Custom hook support
-- custom themes support
+- [x] Custom hook support
+- [ ] Custom themes support
+- [ ] Freedom of content design
+- [ ] Freedom to customise the transitions
 
 ## Connect with Us
 Feel free to reach out.
