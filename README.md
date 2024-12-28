@@ -67,9 +67,10 @@ The `SnackbarProvider` component is used to wrap your application and provide th
 |-----------------|---------|------------------------------------|---------|
 | maxSnackbars    | number  | Maximum number of snackbars to show | 3       |
 | autoHideDuration| number  | Duration to auto-hide the snackbar  | 3000    |
-| icon            | boolean | hide the icon in the snackbar       | true    |
+| icon            | boolean | Hide the icon in the snackbar       | true    |
 | theme           | string  | Theme of the snackbar ('dark' or 'light') | 'light' |
 | anchorOrigin    | object  | Position of the snackbar            | { vertical: 'bottom', horizontal: 'left' } |
+| transitionType  | string  | Transition type for the snackbar ('slide', 'grow', 'fade', 'zoom') | 'slide' |
 
 #### TODO
 - Custom hook support

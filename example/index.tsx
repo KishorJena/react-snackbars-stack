@@ -19,6 +19,7 @@ const lightTheme = createTheme({
     mode: 'light'
   }
 })
+
 const App = () => {
   console.log('App.tsx Run')
   const handleCLick = () => {
@@ -37,10 +38,9 @@ const App = () => {
     <SnackbarProvider 
       maxSnackbars={4} 
       theme={'light'} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+      transitionType={'fade'}
     />
-    {/* <SnackbarProvider maxSnackbars={4} theme={'light'}/> */}
 
      <Button
         color='info'
