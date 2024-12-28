@@ -25,6 +25,7 @@ export interface SnackbarProviderProps {
   theme?: theme;
   anchorOrigin?: AnchorOrigin;
   transitionType?: TransitionType;
+  children?: React.ReactNode;
 }
 
 export type SnackbarAction = 
@@ -32,3 +33,7 @@ export type SnackbarAction =
   | { type: 'CLOSE_SNACKBAR'; payload: number }
   | { type: 'REMOVE_SNACKBAR'; payload: number }
   | { type: 'CLEAR_ALL' };
+
+export type SnackbarContextType = {
+    enqueueSnackbar: (param: SnackbarConfig) => void;
+};

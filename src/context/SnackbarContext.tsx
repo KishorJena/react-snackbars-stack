@@ -1,3 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
+import { SnackbarContextType } from '../types';
 
-export const SnackbarContext = createContext(null);
+export const SnackbarContext = createContext<SnackbarContextType | undefined>(undefined);

@@ -1,18 +1,17 @@
-import { Alert, Portal, ThemeProvider, Zoom } from '@mui/material';
+import { Alert, Portal, ThemeProvider } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import { MAX_SNACKBARS, SNACKBAR_SPACING } from '../constants';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
 import { darkTheme, lightTheme } from '../theme';
-import { Transition } from '../transition/Transition';
 import { SnackbarAction, SnackbarConfig, SnackbarItem, SnackbarProviderProps } from '../types';
 
-import { 
-  Slide, SlideProps, 
-  Grow, GrowProps, 
-  Fade, FadeProps ,
-  Zoom, ZoomProps
+import {
+  Fade,
+  Grow,
+  Slide,
+  Zoom
 } from '@mui/material';
 import { SnackbarContext } from '../context';
 
