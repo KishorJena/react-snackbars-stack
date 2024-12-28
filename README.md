@@ -103,6 +103,7 @@ The `SnackbarProvider` component is used to wrap your application and provide th
 | transitionType  | string  | Transition type for the snackbar ('slide', 'grow', 'fade', 'zoom') | 'slide' |
 
 #### TODO
+- [ ] Fix transition issue for SLIDE
 - [x] Custom hook support
 - [ ] Custom themes support
 - [ ] Freedom of content design

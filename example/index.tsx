@@ -115,8 +115,8 @@ const App2 = () => {
     <SnackbarProvider 
       maxSnackbars={4} 
       theme={'dark'} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transitionType={'fade'}
+      // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transitionType={'zoom'}
     >
       <App />
     </SnackbarProvider>
