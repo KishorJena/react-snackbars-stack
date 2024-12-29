@@ -1,6 +1,6 @@
 import { Alert, Portal, ThemeProvider } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
-import React, { useCallback, useEffect, useReducer, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
 import { MAX_SNACKBARS, SNACKBAR_SPACING } from '../constants';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
@@ -85,8 +85,8 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
       dispatch({ type: 'REMOVE_SNACKBAR', payload: id });
     }, 150);
   };
+  const SnakbarTransition = useMemo(() => transitionComponents(transitionType, anchorOrigin), [transitionType, anchorOrigin]);
   
-  const SnakbarTransition = transitionComponents(transitionType, anchorOrigin);
   // const transitionProps = transitionType === 'slide' ? { direction: oppositeDirections[anchorOrigin.horizontal]} : {};
 
   const enqueueSnackbar = useCallback(({ 
@@ -110,8 +110,7 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
   return (
     <SnackbarContext.Provider value={{ enqueueSnackbar  }}>
 
-      {children}
-
+      
       <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
 
         <Portal>
@@ -161,6 +160,9 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
         </Portal>
 
       </ThemeProvider>
+
+      {children}
+
     </SnackbarContext.Provider>
   );
 };

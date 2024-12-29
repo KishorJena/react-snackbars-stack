@@ -6,7 +6,11 @@ import { createRoot } from 'react-dom/client';
 import { Typography, Button, Alert,createTheme,  ThemeProvider } from '@mui/material';
 
 // import { SnackbarProvider, enqueueSnackbar } from '../.';
-import { SnackbarProvider,  useSnackbar } from '../src';
+import { 
+  // enqueueSnackbar,
+  SnackbarProvider, 
+  useSnackbar 
+} from '../src';
 
 const DURATION = 5500
 
@@ -41,8 +45,8 @@ const App = () => {
     {/* <SnackbarProvider 
       maxSnackbars={4} 
       theme={'light'} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-      transitionType={'fade'}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      transitionType={'slide'}
     /> */}
 
      <Button
@@ -114,9 +118,9 @@ const App2 = () => {
   return (
     <SnackbarProvider 
       maxSnackbars={4} 
-      theme={'dark'} 
-      // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transitionType={'zoom'}
+      // theme={'light'} 
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transitionType={'slide'}
     >
       <App />
     </SnackbarProvider>
