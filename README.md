@@ -1,9 +1,6 @@
 # React Snackbars Stack
 A customizable and easy-to-use snackbar (toast) notification stack for React applications.
-
-<p align="center">
-  <a href="https://github.com/KishorJena" rel="noopener" target="_blank"><img width="756" src="assets/Frame 5.png" alt="notistack logo"></a></p>
-</p>
+Comes with hook and Direct use without hook. Made with MUI (@mui/material).
 
 ![logo](<assets/Frame 5.png>)
 
@@ -80,7 +77,8 @@ export default App;
 ```
 
 ## Screenshot
-![screenshot](https://github.com/user-attachments/assets/a6cbf7ab-d83c-4fc5-a19d-4effbf8cdd16)
+
+![screenshot](assets/screenshot.png)
 
 ## API
 
@@ -109,11 +107,11 @@ The `SnackbarProvider` component is used to wrap your application and provide th
 | transitionType  | string  | Transition type for the snackbar ('slide', 'grow', 'fade', 'zoom') | 'slide' |
 
 #### TODO
-- [ ] Fix transition issue for SLIDE
 - [x] Custom hook support
-- [ ] Custom themes support
-- [ ] Freedom of content design
-- [ ] Freedom to customise the transitions
+- [x] theme switching (MUI based)
+- [ ] filled icons option
+- [ ] Custom theming support
+- [ ] custom transitions
 
 ## Connect with Us
 Feel free to reach out.

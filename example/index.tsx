@@ -7,7 +7,7 @@ import { Typography, Button, Alert,createTheme,  ThemeProvider } from '@mui/mate
 
 // import { SnackbarProvider, enqueueSnackbar } from '../.';
 import { 
-  // enqueueSnackbar,
+  enqueueSnackbar,
   SnackbarProvider, 
   useSnackbar 
 } from '../src';
@@ -27,7 +27,7 @@ const lightTheme = createTheme({
 })
 
 const App = () => {
-  const {enqueueSnackbar} = useSnackbar();
+  // const {enqueueSnackbar} = useSnackbar();
   console.log('App.tsx Run ')
   const handleCLick = () => {
     enqueueSnackbar({ 
@@ -40,14 +40,14 @@ const App = () => {
   return (
     <ThemeProvider theme={lightTheme} >
 
-    <div style={{ width:'100vw', height: '100vh', backgroundColor: '#333', color: '#fff' }}>
+    <div style={{  height: '100vh', backgroundColor: '#333', color: '#fff' }}>
      
-    {/* <SnackbarProvider 
+    <SnackbarProvider 
       maxSnackbars={4} 
       theme={'light'} 
       anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       transitionType={'slide'}
-    /> */}
+    />
 
      <Button
         color='info'
@@ -118,7 +118,7 @@ const App2 = () => {
   return (
     <SnackbarProvider 
       maxSnackbars={4} 
-      // theme={'light'} 
+      theme={'dark'} 
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       transitionType={'slide'}
     >
@@ -129,7 +129,7 @@ const App2 = () => {
 const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = createRoot(rootElement); // Create a root
-  root.render(<App2 />); // Use root.render
+  root.render(<App />); // Use root.render
 } else {
   console.error("Root element not found");
 }
