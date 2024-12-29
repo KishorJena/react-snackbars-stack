@@ -2,11 +2,11 @@ import { eventEmitter } from '../event';
 import { SnackbarConfig } from '../types';
 
 // Helper function to enqueue snackbars
-export const enqueueSnackbar = ({ 
-  message, 
-  severity = 'info', 
+export const enqueueSnackbar = ({
+  message,
+  severity = 'info',
   duration = 5000,
-  preventDuplicate = true
+  preventDuplicate = true,
 }: SnackbarConfig): void => {
   eventEmitter.emit({
     id: Date.now(),
@@ -14,6 +14,6 @@ export const enqueueSnackbar = ({
     severity,
     duration,
     open: true,
-    preventDuplicate: preventDuplicate 
+    preventDuplicate: preventDuplicate,
   });
 };

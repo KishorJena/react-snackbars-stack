@@ -1,4 +1,4 @@
-import { SnackbarItem } from "../types";
+import { SnackbarItem } from '../types';
 
 class EventEmitter {
   private listeners = new Set<(snackbar: SnackbarItem) => void>();
@@ -10,7 +10,10 @@ class EventEmitter {
   async emit(snackbar: SnackbarItem): Promise<void> {
     if (!this.active) return;
 
-    if (snackbar.preventDuplicate && this.activeMessages.has(snackbar.message)) {
+    if (
+      snackbar.preventDuplicate &&
+      this.activeMessages.has(snackbar.message)
+    ) {
       return;
     }
 

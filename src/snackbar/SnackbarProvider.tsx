@@ -1,20 +1,26 @@
 import { Alert, Portal, ThemeProvider } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
-import React, { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+} from 'react';
+import {
+  AnchorOrigin,
+  SnackbarAction,
+  SnackbarConfig,
+  SnackbarItem,
+  SnackbarProviderProps,
+} from '../types';
 import { MAX_SNACKBARS, SNACKBAR_SPACING } from '../constants';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
 import { darkTheme, lightTheme } from '../theme';
-import { AnchorOrigin, SnackbarAction, SnackbarConfig, SnackbarItem, SnackbarProviderProps } from '../types';
-
-import {
-  Fade,
-  Grow,
-  Slide,
-  Zoom
-} from '@mui/material';
 import { SnackbarContext } from '../context';
 import { TransitionProps } from '@mui/material/transitions';
+import { Fade, Grow, Slide, Zoom } from '@mui/material';
 
 type Direction = 'left' | 'right' | 'up' | 'down';
 
@@ -27,10 +33,18 @@ const oppositeDirections: { [key in Direction]: Direction } = {
 
 type TransitionType = 'slide' | 'grow' | 'fade' | 'zoom' | 'default';
 
-const transitionComponents = (transitionType: TransitionType, anchorOrigin: AnchorOrigin): React.ComponentType<any> => {
+const transitionComponents = (
+  transitionType: TransitionType,
+  anchorOrigin: AnchorOrigin
+): React.ComponentType<any> => {
   switch (transitionType) {
     case 'slide':
-      return (props: TransitionProps & { children: React.ReactElement }) => <Slide {...props} direction={oppositeDirections[anchorOrigin.horizontal]} />;
+      return (props: TransitionProps & { children: React.ReactElement }) => (
+        <Slide
+          {...props}
+          direction={oppositeDirections[anchorOrigin.horizontal]}
+        />
+      );
     case 'grow':
       return Grow;
     case 'fade':
@@ -43,17 +57,20 @@ const transitionComponents = (transitionType: TransitionType, anchorOrigin: Anch
 };
 
 // Main component
-export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({ 
-  anchorOrigin = { vertical: 'bottom', horizontal: 'left' }, 
-  maxSnackbars = MAX_SNACKBARS, 
-  icon, 
+export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
+  anchorOrigin = { vertical: 'bottom', horizontal: 'left' },
+  maxSnackbars = MAX_SNACKBARS,
+  icon,
   theme,
   transitionType = 'slide',
-  children
+  children,
 }) => {
-  const [snackbars, dispatch] = useReducer((state: SnackbarItem[], action: SnackbarAction) => snackbarReducer(state, action, maxSnackbars), []);
+  const [snackbars, dispatch] = useReducer(
+    (state: SnackbarItem[], action: SnackbarAction) =>
+      snackbarReducer(state, action, maxSnackbars),
+    []
+  );
   const instanceId = useRef(Date.now());
-
 
   useEffect(() => {
     // Check for multiple instances
@@ -64,19 +81,22 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
 
     // Setup event listener
     eventEmitter.setActive(true);
-    const unsubscribe = eventEmitter.subscribe((newSnackbar) => {
-      console.log("EVENT | newSnackbar adding paylod:", newSnackbar);
+    const unsubscribe = eventEmitter.subscribe(newSnackbar => {
+      console.log('EVENT | newSnackbar adding paylod:', newSnackbar);
       dispatch({ type: 'ADD_SNACKBAR', payload: newSnackbar });
     });
 
-    return ()=>{
+    return () => {
       eventEmitter.setActive(false);
       unsubscribe();
       dispatch({ type: 'CLEAR_ALL' });
     };
   }, []);
 
-  const handleClose = (id: number) => (_event?: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (id: number) => (
+    _event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
     if (reason === 'clickaway') return;
 
     dispatch({ type: 'CLOSE_SNACKBAR', payload: id });
@@ -85,52 +105,50 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
       dispatch({ type: 'REMOVE_SNACKBAR', payload: id });
     }, 150);
   };
-  const SnakbarTransition = useMemo(() => transitionComponents(transitionType, anchorOrigin), [transitionType, anchorOrigin]);
-  
-  // const transitionProps = transitionType === 'slide' ? { direction: oppositeDirections[anchorOrigin.horizontal]} : {};
+  const SnakbarTransition = useMemo(
+    () => transitionComponents(transitionType, anchorOrigin),
+    [transitionType, anchorOrigin]
+  );
 
-  const enqueueSnackbar = useCallback(({ 
-    message, 
-    severity = 'info', 
-    duration = 5000,
-    preventDuplicate = true
-  }: SnackbarConfig): void => {
-    const payload = {
-      id: Date.now(),
+  const enqueueSnackbar = useCallback(
+    ({
       message,
-      severity,
-      duration,
-      open: true,
-      preventDuplicate: preventDuplicate 
-    };
-    dispatch({ type: 'ADD_SNACKBAR', payload });
-  }, []);
-  
+      severity = 'info',
+      duration = 5000,
+      preventDuplicate = true,
+    }: SnackbarConfig): void => {
+      const payload = {
+        id: Date.now(),
+        message,
+        severity,
+        duration,
+        open: true,
+        preventDuplicate: preventDuplicate,
+      };
+      dispatch({ type: 'ADD_SNACKBAR', payload });
+    },
+    []
+  );
 
   return (
-    <SnackbarContext.Provider value={{ enqueueSnackbar  }}>
-
-      
+    <SnackbarContext.Provider value={{ enqueueSnackbar }}>
       <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-
         <Portal>
-          <div 
+          <div
             data-snackbar-provider={instanceId.current}
-            style={{ 
-              position: 'fixed', 
-              [anchorOrigin.vertical]: 0, 
-              [anchorOrigin.horizontal]: 0, 
+            style={{
+              position: 'fixed',
+              [anchorOrigin.vertical]: 0,
+              [anchorOrigin.horizontal]: 0,
               zIndex: 9999,
-              pointerEvents: 'none' ,
+              pointerEvents: 'none',
             }}
           >
             {snackbars.map((snackbar, index) => (
-                <Snackbar
+              <Snackbar
                 key={snackbar.id}
                 open={snackbar.open}
-                // TransitionComponent={props=> <Transition {...props} transitionType='slide' anchorOrigin={anchorOrigin} />}
                 TransitionComponent={SnakbarTransition}
-                // TransitionProps={transitionProps}
                 autoHideDuration={snackbar.duration}
                 onClose={handleClose(snackbar.id)}
                 anchorOrigin={anchorOrigin}
@@ -140,29 +158,28 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
                   },
                   pointerEvents: 'auto',
                   transition: 'all 0.08s ease-in-out',
-                  [anchorOrigin.vertical]: `${(index * SNACKBAR_SPACING) + 24}px !important`,
+                  [anchorOrigin.vertical]: `${index * SNACKBAR_SPACING +
+                    24}px !important`,
                 }}
-                >
+              >
                 <Alert
                   variant="filled"
                   onClose={handleClose(snackbar.id)}
                   severity={snackbar.severity}
-                  sx={{ 
-                  width: '100%',
+                  sx={{
+                    width: '100%',
                   }}
                   icon={icon === true ? undefined : icon}
                 >
                   {snackbar.message}
                 </Alert>
-                </Snackbar>
+              </Snackbar>
             ))}
           </div>
         </Portal>
-
       </ThemeProvider>
 
       {children}
-
     </SnackbarContext.Provider>
   );
 };

@@ -14,11 +14,14 @@ export interface SnackbarItem extends Required<SnackbarConfig> {
 
 export type TransitionType = 'slide' | 'grow' | 'fade';
 
-export type AnchorOrigin = { vertical: 'top' | 'bottom', horizontal: 'left' | 'right' };
+export type AnchorOrigin = {
+  vertical: 'top' | 'bottom';
+  horizontal: 'left' | 'right';
+};
 
 export type theme = 'light' | 'dark';
 
-export interface SnackbarProviderProps { 
+export interface SnackbarProviderProps {
   maxSnackbars?: number;
   preventDuplicate?: boolean;
   icon?: boolean;
@@ -28,12 +31,12 @@ export interface SnackbarProviderProps {
   children?: React.ReactNode;
 }
 
-export type SnackbarAction = 
+export type SnackbarAction =
   | { type: 'ADD_SNACKBAR'; payload: SnackbarItem }
   | { type: 'CLOSE_SNACKBAR'; payload: number }
   | { type: 'REMOVE_SNACKBAR'; payload: number }
   | { type: 'CLEAR_ALL' };
 
 export type SnackbarContextType = {
-    enqueueSnackbar: (param: SnackbarConfig) => void;
+  enqueueSnackbar: (param: SnackbarConfig) => void;
 };

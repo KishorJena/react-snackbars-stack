@@ -1,7 +1,11 @@
 import { SnackbarItem, SnackbarAction } from '../types';
 import { eventEmitter } from '../event';
 
-export const snackbarReducer = (state: SnackbarItem[], action: SnackbarAction, maxSnackbars: number): SnackbarItem[] => {
+export const snackbarReducer = (
+  state: SnackbarItem[],
+  action: SnackbarAction,
+  maxSnackbars: number
+): SnackbarItem[] => {
   switch (action.type) {
     case 'ADD_SNACKBAR':
       return [...state, action.payload].slice(-maxSnackbars);
