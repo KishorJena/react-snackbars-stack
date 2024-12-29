@@ -1,9 +1,8 @@
 # React Snackbars Stack
 A customizable and easy-to-use snackbar (toast) notification stack for React applications.
+![logo](https://github.com/user-attachments/assets/f1bd3a5a-6a59-41a5-a448-7ec790cde01f)
 
-![alt text](./Frame%204.png)
-
-![alt text](./image.png)
+![screenshot](https://github.com/user-attachments/assets/a6cbf7ab-d83c-4fc5-a19d-4effbf8cdd16)
 
 ## Installation
 
