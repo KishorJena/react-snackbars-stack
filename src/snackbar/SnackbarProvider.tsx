@@ -1,4 +1,4 @@
-import { Alert, Portal, ThemeProvider } from '@mui/material';
+import {Alert, Portal, ThemeProvider} from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import React, {
   useCallback,
@@ -171,7 +171,7 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
                   }}
                   icon={icon === true ? undefined : icon}
                 >
-                  {snackbar.message}
+                  {"+"+snackbar.message}
                 </Alert>
               </Snackbar>
             ))}

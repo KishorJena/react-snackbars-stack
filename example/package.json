@@ -8,7 +8,8 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "react-app-polyfill": "^1.0.0"
+    "react-app-polyfill": "^1.0.0",
+    "react-snackbars-stack": "^0.4.2"
   },
   "alias": {
     "@mui/material": "../node_modules/@mui/material",

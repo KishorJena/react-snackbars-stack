@@ -1,13 +1,19 @@
 # React Snackbars Stack
-A customizable and ready-to-use snackbar (toast) notification stack for React applications. Comes with a hook and direct usage without a hook. Built with MUI (@mui/material).
-
 <p align="center">
   <img src="assets/Frame 5.png" alt="logo"/>
   <br/>
   <img alt="CI Status" src="https://github.com/KishorJena/react-snackbars-stack/actions/workflows/main.yml/badge.svg">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/react-snackbars-stack">
   <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/heyKSR">
+
+  <p align="center">React Snackbars Stack to show multiple snackbars as queue/stack</p>
 </p>
+
+## Description
+
+React Snackbars Stack is a flexible and easy-to-use library for displaying snackbars in your React applications. It provides a simple API to show notifications with different severities and customizable options. Whether you need to show a single snackbar or manage a stack of multiple snackbars, this library has you covered.
+
+**Purpose:** I created this for my personal use because Notistack has not updated its dependencies, which was causing issues in my project deployment. I have published this for anyone looking for an alternative to Notistack.(Although this package is not better then Notistack.)
 
 ## Installation
 
@@ -82,6 +88,18 @@ const App = () => (
 );
 
 export default App;
+```
+
+## NextJS support 
+If you're using Next.js and need to integrate the react-snackbars-stack package into your root layout (or any server component), you’ll need to handle the use client directive. This is required because the context provider relies on React hooks, which are incompatible with server components by default. 
+
+Create a Wrapper Component, e.g., SnackbarProviderWrapper.jsx, with the `use client` directive.
+```jsx
+'use client';
+
+import { SnackbarProvider } from 'react-snackbars-stack';
+
+export default SnackbarProvider;
 ```
 
 ## Screenshot

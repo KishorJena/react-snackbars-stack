@@ -1,19 +1,9 @@
-import 'react-app-polyfill/ie11';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { createRoot } from 'react-dom/client';
-// import { Thing } from '../.';
-import { Typography, Button, Alert,createTheme,  ThemeProvider } from '@mui/material';
+
+import { Button, createTheme, ThemeProvider } from '@mui/material';
 
 // import { SnackbarProvider, enqueueSnackbar } from '../.';
-import { 
-  enqueueSnackbar,
-  SnackbarProvider, 
-  useSnackbar 
-} from '../.';
-
-import {AppDirect} from './SampleDirect';
-import {AppHook} from './SampleHook';
+import { enqueueSnackbar, SnackbarProvider } from 'react-snackbars-stack';
 
 const DURATION = 5500
 
@@ -29,7 +19,7 @@ const lightTheme = createTheme({
   }
 })
 
-const App = () => {
+const AppDirect = () => {
   // const {enqueueSnackbar} = useSnackbar();
   console.log('App.tsx Run ')
   const handleCLick = () => {
@@ -44,14 +34,13 @@ const App = () => {
     <ThemeProvider theme={lightTheme} >
 
     <div style={{  height: '100vh', backgroundColor: '#333', color: '#fff' }}>
-    {/* <AppDirect/>      */}
-    <AppHook/>     
-    {/* <SnackbarProvider 
+     <h1>Direct event based</h1>
+    <SnackbarProvider 
       maxSnackbars={4} 
       theme={'light'} 
       anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       transitionType={'slide'}
-    /> */}
+    />
 
      <Button
         color='info'
@@ -118,22 +107,6 @@ const App = () => {
   );
 };
 
-const App2 = () => {
-  return (
-    <SnackbarProvider 
-      maxSnackbars={4} 
-      theme={'dark'} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transitionType={'slide'}
-    >
-      <App />
-    </SnackbarProvider>
-  )
-}
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  const root = createRoot(rootElement); // Create a root
-  root.render(<App />); // Use root.render
-} else {
-  console.error("Root element not found");
-}
+
+
+export  {AppDirect};

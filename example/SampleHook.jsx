@@ -1,19 +1,8 @@
-import 'react-app-polyfill/ie11';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { createRoot } from 'react-dom/client';
-// import { Thing } from '../.';
-import { Typography, Button, Alert,createTheme,  ThemeProvider } from '@mui/material';
+import { Button, createTheme, ThemeProvider } from '@mui/material';
 
 // import { SnackbarProvider, enqueueSnackbar } from '../.';
-import { 
-  enqueueSnackbar,
-  SnackbarProvider, 
-  useSnackbar 
-} from '../.';
-
-import {AppDirect} from './SampleDirect';
-import {AppHook} from './SampleHook';
+import { useSnackbar, SnackbarProvider } from 'react-snackbars-stack';
 
 const DURATION = 5500
 
@@ -30,28 +19,15 @@ const lightTheme = createTheme({
 })
 
 const App = () => {
-  // const {enqueueSnackbar} = useSnackbar();
+  const {enqueueSnackbar} = useSnackbar();
   console.log('App.tsx Run ')
-  const handleCLick = () => {
-    enqueueSnackbar({ 
-      message: 'This is a snackbar message!', 
-      severity:'info',
-      duration: DURATION, 
-      preventDuplicate: false 
-    })
-  }
+
   return (
     <ThemeProvider theme={lightTheme} >
 
     <div style={{  height: '100vh', backgroundColor: '#333', color: '#fff' }}>
-    {/* <AppDirect/>      */}
-    <AppHook/>     
-    {/* <SnackbarProvider 
-      maxSnackbars={4} 
-      theme={'light'} 
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-      transitionType={'slide'}
-    /> */}
+     <h1>Hook useSnackbar</h1>
+
 
      <Button
         color='info'
@@ -118,22 +94,18 @@ const App = () => {
   );
 };
 
-const App2 = () => {
+const AppHook = () => {
   return (
     <SnackbarProvider 
       maxSnackbars={4} 
-      theme={'dark'} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      theme={'light'} 
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       transitionType={'slide'}
     >
+      
       <App />
     </SnackbarProvider>
   )
 }
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  const root = createRoot(rootElement); // Create a root
-  root.render(<App />); // Use root.render
-} else {
-  console.error("Root element not found");
-}
+
+export { AppHook };
