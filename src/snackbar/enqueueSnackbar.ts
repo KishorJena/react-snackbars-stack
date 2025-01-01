@@ -2,9 +2,8 @@ import { DEFAULT_OPTIONS } from '../constants';
 import { eventEmitter } from '../event';
 import { EnqueueSnackbar, SnackbarPayload } from '../types';
 
-
 // Helper function to enqueue snackbars
-export const enqueueSnackbar:EnqueueSnackbar = (
+export const enqueueSnackbar: EnqueueSnackbar = (
   message,
   options = DEFAULT_OPTIONS
 ) => {

@@ -13,8 +13,6 @@
 
 React Snackbars Stack is a flexible and easy-to-use library for displaying snackbars in your React applications. It provides a simple API to show notifications with different severities and customizable options. Whether you need to show a single snackbar or manage a stack of multiple snackbars, this library has you covered.
 
-**Purpose:** I created this for my personal use because Notistack has not updated its dependencies, which was causing issues in my project deployment. I have published this for anyone looking for an alternative to Notistack.(Although this package is not better then Notistack.)
-
 ## Installation
 
 Install the package using npm or yarn:
@@ -39,10 +37,16 @@ import { SnackbarProvider, enqueueSnackbar } from 'react-snackbars-stack';
 
 function App() {
   const handleClick = () => {
-    enqueueSnackbar({ 
-      message: 'This is a snackbar message!', 
-      severity: 'success'
-    });
+    enqueueSnackbar('This is a snackbar message!');
+    // OR
+    enqueueSnackbar(
+      'This is a snackbar message with applied options!', 
+      {
+        severity:'success', // inof, success, warning, error
+        preventDuplicate:true,
+        duration:1500
+      }
+    );
   };
 
   return (
@@ -68,10 +72,7 @@ function MyComponent() {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClick = () => {
-    enqueueSnackbar({ 
-      message: 'This is a snackbar message!', 
-      severity: 'success'
-    });
+    enqueueSnackbar(...);
   };
 
   return (
@@ -139,6 +140,8 @@ The `SnackbarProvider` component is used to wrap your application and provide th
 - [ ] Filled icons option
 - [ ] Custom theming support
 - [ ] Custom transitions
+
+**Purpose:** Created for personal use due to Notistack's outdated dependencies causing deployment issues. Published for anyone seeking an alternative to Notistack (though this package is not superior to Notistack).
 
 ## Connect with Us
 

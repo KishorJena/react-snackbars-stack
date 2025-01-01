@@ -1,27 +1,24 @@
-export const SNACKBAR_SPACING = 60;
-
-import type { DirectionTypes, Severity, SnackbarOptions } from '../types';
+import { DirectionTypes, Severity } from '../types';
 
 export const SnackbarDefaults = {
   anchorOrigin: {
     vertical: 'bottom',
-    horizontal: 'left'
-  } , 
-  
-  maxSnackbars: 5,
+    horizontal: 'left',
+  },
+  maxSnackbars: 4,
   theme: 'light',
-  transitionType: 'slide'
+  transitionType: 'slide',
 } as const;
 
 export const OPPOSITE_DIRECTIONS: Record<DirectionTypes, DirectionTypes> = {
   left: 'right',
   right: 'left',
   up: 'down',
-  down: 'up'
+  down: 'up',
 } as const;
 
-export const DEFAULT_OPTIONS:SnackbarOptions  = {
+export const DEFAULT_OPTIONS = {
   severity: 'info' as Severity,
-  duration: 3000 as number,
-  preventDuplicate: false as boolean,
-}
+  duration: 3000,
+  preventDuplicate: false,
+} as const;

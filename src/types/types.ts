@@ -7,8 +7,10 @@ export interface SnackbarOptions {
   preventDuplicate?: boolean; // Optional
 }
 
-export type EnqueueSnackbar = (message: string, options?: SnackbarOptions) => void;
-
+export type EnqueueSnackbar = (
+  message: string,
+  options?: SnackbarOptions
+) => void;
 
 export interface SnackbarPayload {
   id: number;

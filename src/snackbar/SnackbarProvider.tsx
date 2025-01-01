@@ -1,4 +1,12 @@
-import { Alert, Fade, Grow, Portal, Slide, ThemeProvider, Zoom } from '@mui/material';
+import {
+  Alert,
+  Fade,
+  Grow,
+  Portal,
+  Slide,
+  ThemeProvider,
+  Zoom,
+} from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import { TransitionProps } from '@mui/material/transitions';
 import React, {
@@ -9,7 +17,7 @@ import React, {
   useReducer,
   useRef,
 } from 'react';
-import { DEFAULT_OPTIONS, SNACKBAR_SPACING, SnackbarDefaults } from '../constants';
+import { DEFAULT_OPTIONS, SnackbarDefaults } from '../constants';
 import { SnackbarContext } from '../context';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
@@ -21,9 +29,8 @@ import {
   SnackbarAction,
   SnackbarPayload,
   SnackbarProviderProps,
-  TransitionType
+  TransitionType,
 } from '../types';
-
 
 const oppositeDirections: { [key in DirectionTypes]: DirectionTypes } = {
   left: 'right',
@@ -32,6 +39,7 @@ const oppositeDirections: { [key in DirectionTypes]: DirectionTypes } = {
   down: 'up',
 };
 
+const SNACKBAR_SPACING = 60;
 
 const transitionComponents = (
   transitionType: TransitionType,
@@ -60,12 +68,11 @@ const transitionComponents = (
 const Provider: React.FC<SnackbarProviderProps> = ({
   anchorOrigin = SnackbarDefaults.anchorOrigin,
   maxSnackbars = SnackbarDefaults.maxSnackbars,
-  theme=SnackbarDefaults.theme,
+  theme = SnackbarDefaults.theme,
   transitionType = SnackbarDefaults.transitionType,
   icon,
   children,
 }) => {
-
   const [snackbars, dispatch] = useReducer(
     (state: SnackbarPayload[], action: SnackbarAction) =>
       snackbarReducer(state, action, maxSnackbars),
@@ -94,26 +101,31 @@ const Provider: React.FC<SnackbarProviderProps> = ({
     };
   }, []);
 
-  const handleClose = useCallback((id: number) => (
-    _event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === 'clickaway') return;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleClose = useCallback(
+    (id: number) => (
+      _event?: React.SyntheticEvent | Event,
+      reason?: string
+    ) => {
+      if (reason === 'clickaway') return;
 
-    dispatch({ type: 'CLOSE_SNACKBAR', payload: id });
+      dispatch({ type: 'CLOSE_SNACKBAR', payload: id });
 
-    setTimeout(() => {
-      dispatch({ type: 'REMOVE_SNACKBAR', payload: id });
-    }, 150);
-  }, []);
+      setTimeout(() => {
+        dispatch({ type: 'REMOVE_SNACKBAR', payload: id });
+      }, 150);
+    },
+    []
+  );
 
   const SnakbarTransition = useMemo(
     () => transitionComponents(transitionType, anchorOrigin),
-    [transitionType, anchorOrigin.vertical, anchorOrigin.horizontal]
+    [transitionType, anchorOrigin]
   );
 
-  const enqueueSnackbar:EnqueueSnackbar = useCallback(
-    (message, options=DEFAULT_OPTIONS) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const enqueueSnackbar: EnqueueSnackbar = useCallback(
+    (message, options = DEFAULT_OPTIONS) => {
       const id = Date.now();
       const payload: SnackbarPayload = {
         id: id,
@@ -124,14 +136,13 @@ const Provider: React.FC<SnackbarProviderProps> = ({
         preventDuplicate: options.preventDuplicate,
       };
 
-      if(maxSnackbars === snackbars.length){
+      if (maxSnackbars === snackbars.length) {
         handleClose(snackbars[0].id)();
       }
 
       dispatch({ type: 'ADD_SNACKBAR', payload });
-
     },
-    [maxSnackbars, snackbars.length]
+    [maxSnackbars, snackbars, handleClose]
   );
 
   return (
@@ -175,7 +186,7 @@ const Provider: React.FC<SnackbarProviderProps> = ({
                   }}
                   icon={icon === true ? undefined : icon}
                 >
-                  {snackbar.message+"00000000000"}
+                  {snackbar.message + '00000000000'}
                 </Alert>
               </Snackbar>
             ))}
