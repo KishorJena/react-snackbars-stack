@@ -2,9 +2,8 @@
 .DS_Store
 node_modules
 .cache
-/example/.parcel-cache
-example/.parcel-cache/
+dist
+example/dist
+example/node_modules
+example/.parcel-cache
 .parcel-cache
-.parcel-cache/
-**/parcel-cache/
-example/.parcel-cache/

@@ -17,7 +17,7 @@ export const OPPOSITE_DIRECTIONS: Record<DirectionTypes, DirectionTypes> = {
   down: 'up',
 } as const;
 
-export const DEFAULT_OPTIONS = {
+export const DEFAULT_ENQUEUE_OPTIONS = {
   severity: 'info' as Severity,
   duration: 3000,
   preventDuplicate: false,

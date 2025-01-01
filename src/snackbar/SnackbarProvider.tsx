@@ -17,7 +17,7 @@ import React, {
   useReducer,
   useRef,
 } from 'react';
-import { DEFAULT_OPTIONS, SnackbarDefaults } from '../constants';
+import { DEFAULT_ENQUEUE_OPTIONS, SnackbarDefaults } from '../constants';
 import { SnackbarContext } from '../context';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
@@ -125,15 +125,15 @@ const Provider: React.FC<SnackbarProviderProps> = ({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const enqueueSnackbar: EnqueueSnackbar = useCallback(
-    (message, options = DEFAULT_OPTIONS) => {
-      const id = Date.now();
+    (message, options = {}) => {
       const payload: SnackbarPayload = {
-        id: id,
+        id: Date.now(),
         open: true,
         message,
-        severity: options.severity,
-        duration: options.duration,
-        preventDuplicate: options.preventDuplicate,
+        severity: options.severity || DEFAULT_ENQUEUE_OPTIONS.severity,
+        duration: options.duration || DEFAULT_ENQUEUE_OPTIONS.duration,
+        preventDuplicate:
+          options.preventDuplicate || DEFAULT_ENQUEUE_OPTIONS.preventDuplicate,
       };
 
       if (maxSnackbars === snackbars.length) {

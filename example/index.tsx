@@ -11,8 +11,8 @@ import {
   SnackbarProvider, 
   useSnackbar 
 // } from '../.';
-// } from '../.';
-} from '../src';
+} from '../.';
+// } from '../src';
 
 import {AppDirect} from './SampleDirect';
 import {AppHook} from './SampleHook';
@@ -39,6 +39,12 @@ const App = () => {
       <div style={{  height: '100vh', backgroundColor: '#333', color: '#fff' }}>
         {/* <AppDirect/>      */}
         {/* <AppHook/>    */}
+        {/* <SnackbarProvider 
+      maxSnackbars={3} 
+      theme={'light'} 
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transitionType={'slide'}
+    /> */}
         <Button
         color='info'
         variant={'contained'}
@@ -47,13 +53,13 @@ const App = () => {
             'This is a snackbar message!', 
             { 
               severity:'info',
-              duration: DURATION, 
+              // duration: DURATION, 
               preventDuplicate: false 
             }
           )
         }}
       >
-        info.
+        info..|.
       </Button>  
         <Button
         color='success'
