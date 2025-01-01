@@ -186,7 +186,7 @@ const Provider: React.FC<SnackbarProviderProps> = ({
                   }}
                   icon={icon === true ? undefined : icon}
                 >
-                  {snackbar.message + '00000000000'}
+                  {snackbar.message}
                 </Alert>
               </Snackbar>
             ))}
