@@ -1,12 +1,13 @@
 {
   "name": "react-snackbars-stack",
   "description": "A simple and flexible stackable snackbars for React",
-  "version": "0.4.3-beta.4",
+  "version": "0.4.3-beta.5",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "engines": {
     "node": ">=18"
