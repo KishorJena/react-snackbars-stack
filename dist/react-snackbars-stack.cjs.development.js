@@ -653,7 +653,7 @@ var Provider = function Provider(_ref) {
         width: '100%'
       },
       icon: icon === true ? undefined : icon
-    }, snackbar.message + '00000000000'));
+    }, snackbar.message));
   })))), children);
 };
 var SnackbarProvider = /*#__PURE__*/React.memo(Provider);
