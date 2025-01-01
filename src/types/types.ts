@@ -1,4 +1,5 @@
 export type Severity = 'info' | 'success' | 'warning' | 'error';
+export type DirectionTypes = 'left' | 'right' | 'up' | 'down';
 
 export interface SnackbarConfig {
   message: string;
@@ -12,22 +13,21 @@ export interface SnackbarItem extends Required<SnackbarConfig> {
   open: boolean;
 }
 
-export type TransitionType = 'slide' | 'grow' | 'fade';
+export type TransitionType = 'slide' | 'grow' | 'fade' | 'zoom' | 'default';
 
 export type AnchorOrigin = {
   vertical: 'top' | 'bottom';
   horizontal: 'left' | 'right';
 };
 
-export type theme = 'light' | 'dark';
+export type SnackbarTheme = 'light' | 'dark';
 
 export interface SnackbarProviderProps {
-  maxSnackbars?: number;
-  preventDuplicate?: boolean;
-  icon?: boolean;
-  theme?: theme;
-  anchorOrigin?: AnchorOrigin;
   transitionType?: TransitionType;
+  anchorOrigin?: AnchorOrigin;
+  maxSnackbars?: number;
+  theme?: SnackbarTheme;
+  icon?: boolean;
   children?: React.ReactNode;
 }
 

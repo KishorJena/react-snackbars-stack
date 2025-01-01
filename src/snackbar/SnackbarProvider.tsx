@@ -1,37 +1,37 @@
-import {Alert, Portal, ThemeProvider} from '@mui/material';
+import { Alert, Fade, Grow, Portal, Slide, ThemeProvider, Zoom } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
+import { TransitionProps } from '@mui/material/transitions';
 import React, {
+  memo,
   useCallback,
   useEffect,
   useMemo,
   useReducer,
   useRef,
 } from 'react';
+import { SNACKBAR_SPACING, SnackbarDefaults } from '../constants';
+import { SnackbarContext } from '../context';
+import { eventEmitter } from '../event';
+import { snackbarReducer } from '../reducers';
+import { darkTheme, lightTheme } from '../theme';
 import {
   AnchorOrigin,
+  DirectionTypes,
   SnackbarAction,
   SnackbarConfig,
   SnackbarItem,
   SnackbarProviderProps,
+  TransitionType,
 } from '../types';
-import { MAX_SNACKBARS, SNACKBAR_SPACING } from '../constants';
-import { eventEmitter } from '../event';
-import { snackbarReducer } from '../reducers';
-import { darkTheme, lightTheme } from '../theme';
-import { SnackbarContext } from '../context';
-import { TransitionProps } from '@mui/material/transitions';
-import { Fade, Grow, Slide, Zoom } from '@mui/material';
 
-type Direction = 'left' | 'right' | 'up' | 'down';
 
-const oppositeDirections: { [key in Direction]: Direction } = {
+const oppositeDirections: { [key in DirectionTypes]: DirectionTypes } = {
   left: 'right',
   right: 'left',
   up: 'down',
   down: 'up',
 };
 
-type TransitionType = 'slide' | 'grow' | 'fade' | 'zoom' | 'default';
 
 const transitionComponents = (
   transitionType: TransitionType,
@@ -57,12 +57,12 @@ const transitionComponents = (
 };
 
 // Main component
-export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
-  anchorOrigin = { vertical: 'bottom', horizontal: 'left' },
-  maxSnackbars = MAX_SNACKBARS,
+const Provider: React.FC<SnackbarProviderProps> = ({
+  anchorOrigin = SnackbarDefaults.anchorOrigin,
+  maxSnackbars = SnackbarDefaults.maxSnackbars,
+  theme=SnackbarDefaults.theme,
+  transitionType = SnackbarDefaults.transitionType,
   icon,
-  theme,
-  transitionType = 'slide',
   children,
 }) => {
   const [snackbars, dispatch] = useReducer(
@@ -93,7 +93,7 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
     };
   }, []);
 
-  const handleClose = (id: number) => (
+  const handleClose = useCallback((id: number) => (
     _event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
@@ -104,10 +104,11 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
     setTimeout(() => {
       dispatch({ type: 'REMOVE_SNACKBAR', payload: id });
     }, 150);
-  };
+  }, []);
+
   const SnakbarTransition = useMemo(
     () => transitionComponents(transitionType, anchorOrigin),
-    [transitionType, anchorOrigin]
+    [transitionType, anchorOrigin.vertical, anchorOrigin.horizontal]
   );
 
   const enqueueSnackbar = useCallback(
@@ -183,3 +184,5 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
     </SnackbarContext.Provider>
   );
 };
+
+export const SnackbarProvider = memo(Provider);
