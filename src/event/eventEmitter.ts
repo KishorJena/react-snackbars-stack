@@ -1,13 +1,13 @@
-import { SnackbarItem } from '../types';
+import { SnackbarPayload } from '../types';
 
 class EventEmitter {
-  private listeners = new Set<(snackbar: SnackbarItem) => void>();
+  private listeners = new Set<(snackbar: SnackbarPayload) => void>();
   private active = false;
-  private queue: SnackbarItem[] = [];
+  private queue: SnackbarPayload[] = [];
   private processing = false;
   private activeMessages = new Set<string>();
 
-  async emit(snackbar: SnackbarItem): Promise<void> {
+  async emit(snackbar: SnackbarPayload): Promise<void> {
     if (!this.active) return;
 
     if (
@@ -35,7 +35,7 @@ class EventEmitter {
     }
   }
 
-  subscribe(listener: (snackbar: SnackbarItem) => void): () => void {
+  subscribe(listener: (snackbar: SnackbarPayload) => void): () => void {
     this.listeners.add(listener);
     return () => {
       this.listeners.delete(listener);

@@ -1,5 +1,7 @@
 {
-  "version": "0.4.3-beta.3",
+  "name": "react-snackbars-stack",
+  "description": "A simple and flexible stackable snackbars for React",
+  "version": "0.4.3-beta.4",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -31,7 +33,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-snackbars-stack",
   "author": "Kishor Jena",
   "repository": {
     "type": "git",

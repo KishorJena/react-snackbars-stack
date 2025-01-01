@@ -42,16 +42,18 @@ const AppDirect = () => {
       transitionType={'slide'}
     />
 
-     <Button
+<Button
         color='info'
         variant={'contained'}
         onClick={() => {
-          enqueueSnackbar({ 
-            message: 'This is a snackbar message!', 
-            severity:'info',
-            duration: DURATION, 
-            preventDuplicate: false 
-          })
+          enqueueSnackbar(
+            'This is a snackbar message!', 
+            { 
+              severity:'info',
+              duration: DURATION, 
+              preventDuplicate: false 
+            }
+          )
         }}
       >
         info
@@ -60,12 +62,14 @@ const AppDirect = () => {
         color='success'
         variant={'contained'}
         onClick={() => {
-          enqueueSnackbar({ 
-            message: 'This is a snackbar message', 
-            severity:'success',
-            duration: DURATION, 
-            preventDuplicate: false,
-          })
+          enqueueSnackbar(
+             'This is a snackbar message', 
+            { 
+              severity:'success',
+              duration: DURATION, 
+              preventDuplicate: false,
+            }
+          )
         }}
       >
         Success
@@ -74,12 +78,14 @@ const AppDirect = () => {
         color='warning'
         variant={'contained'}
         onClick={() => {
-          enqueueSnackbar({ 
-            message: 'This is a snackbar message', 
-            severity:'warning',
-            duration: DURATION, 
-            preventDuplicate: false,
-          })
+          enqueueSnackbar(
+            'This is a snackbar message', 
+            { 
+              severity:'warning',
+              duration: DURATION, 
+              preventDuplicate: false,
+            }
+          )
         }}
       >
         warning
@@ -88,16 +94,19 @@ const AppDirect = () => {
         color='error'
         variant={'contained'}
         onClick={() => {
-          enqueueSnackbar({ 
-            message: 'This is a snackbar message', 
-            severity:'error',
-            duration: DURATION, 
-            preventDuplicate: false,
-          })
+          enqueueSnackbar(
+            'This is a snackbar message', 
+            { 
+              severity:'error',
+              duration: DURATION, 
+              preventDuplicate: false,
+            }
+          )
         }}
       >
         error
       </Button>
+ 
  
 
 

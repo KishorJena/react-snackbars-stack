@@ -1,19 +1,21 @@
+import { DEFAULT_OPTIONS } from '../constants';
 import { eventEmitter } from '../event';
-import { SnackbarConfig } from '../types';
+import { EnqueueSnackbar, SnackbarPayload } from '../types';
+
 
 // Helper function to enqueue snackbars
-export const enqueueSnackbar = ({
+export const enqueueSnackbar:EnqueueSnackbar = (
   message,
-  severity = 'info',
-  duration = 5000,
-  preventDuplicate = true,
-}: SnackbarConfig): void => {
-  eventEmitter.emit({
+  options = DEFAULT_OPTIONS
+) => {
+  const snackbarEventEmit: SnackbarPayload = {
     id: Date.now(),
-    message,
-    severity,
-    duration,
     open: true,
-    preventDuplicate: preventDuplicate,
-  });
+    message,
+    severity: options.severity,
+    duration: options.duration,
+    preventDuplicate: options.preventDuplicate,
+  };
+
+  eventEmitter.emit(snackbarEventEmit);
 };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, createTheme, ThemeProvider } from '@mui/material';
 
 // import { SnackbarProvider, enqueueSnackbar } from '../.';
-import { useSnackbar, SnackbarProvider } from 'react-snackbars-stack';
+import { useSnackbar, SnackbarProvider } from '../.';
 
 const DURATION = 5500
 
@@ -20,7 +20,6 @@ const lightTheme = createTheme({
 
 const App = () => {
   const {enqueueSnackbar} = useSnackbar();
-  console.log('App.tsx Run ')
 
   return (
     <ThemeProvider theme={lightTheme} >
@@ -33,12 +32,14 @@ const App = () => {
         color='info'
         variant={'contained'}
         onClick={() => {
-          enqueueSnackbar({ 
-            message: 'This is a snackbar message!', 
-            severity:'info',
-            duration: DURATION, 
-            preventDuplicate: false 
-          })
+          enqueueSnackbar(
+            'This is a snackbar message!', 
+            { 
+              severity:'info',
+              duration: DURATION, 
+              preventDuplicate: false 
+            }
+          )
         }}
       >
         info
@@ -47,12 +48,14 @@ const App = () => {
         color='success'
         variant={'contained'}
         onClick={() => {
-          enqueueSnackbar({ 
-            message: 'This is a snackbar message', 
-            severity:'success',
-            duration: DURATION, 
-            preventDuplicate: false,
-          })
+          enqueueSnackbar(
+             'This is a snackbar message', 
+            { 
+              severity:'success',
+              duration: DURATION, 
+              preventDuplicate: false,
+            }
+          )
         }}
       >
         Success
@@ -61,12 +64,14 @@ const App = () => {
         color='warning'
         variant={'contained'}
         onClick={() => {
-          enqueueSnackbar({ 
-            message: 'This is a snackbar message', 
-            severity:'warning',
-            duration: DURATION, 
-            preventDuplicate: false,
-          })
+          enqueueSnackbar(
+            'This is a snackbar message', 
+            { 
+              severity:'warning',
+              duration: DURATION, 
+              preventDuplicate: false,
+            }
+          )
         }}
       >
         warning
@@ -75,12 +80,14 @@ const App = () => {
         color='error'
         variant={'contained'}
         onClick={() => {
-          enqueueSnackbar({ 
-            message: 'This is a snackbar message', 
-            severity:'error',
-            duration: DURATION, 
-            preventDuplicate: false,
-          })
+          enqueueSnackbar(
+            'This is a snackbar message', 
+            { 
+              severity:'error',
+              duration: DURATION, 
+              preventDuplicate: false,
+            }
+          )
         }}
       >
         error
@@ -97,7 +104,7 @@ const App = () => {
 const AppHook = () => {
   return (
     <SnackbarProvider 
-      maxSnackbars={4} 
+      // maxSnackbars={3} 
       theme={'light'} 
       anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       transitionType={'slide'}

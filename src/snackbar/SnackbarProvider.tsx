@@ -9,7 +9,7 @@ import React, {
   useReducer,
   useRef,
 } from 'react';
-import { SNACKBAR_SPACING, SnackbarDefaults } from '../constants';
+import { DEFAULT_OPTIONS, SNACKBAR_SPACING, SnackbarDefaults } from '../constants';
 import { SnackbarContext } from '../context';
 import { eventEmitter } from '../event';
 import { snackbarReducer } from '../reducers';
@@ -17,11 +17,11 @@ import { darkTheme, lightTheme } from '../theme';
 import {
   AnchorOrigin,
   DirectionTypes,
+  EnqueueSnackbar,
   SnackbarAction,
-  SnackbarConfig,
-  SnackbarItem,
+  SnackbarPayload,
   SnackbarProviderProps,
-  TransitionType,
+  TransitionType
 } from '../types';
 
 
@@ -65,11 +65,13 @@ const Provider: React.FC<SnackbarProviderProps> = ({
   icon,
   children,
 }) => {
+
   const [snackbars, dispatch] = useReducer(
-    (state: SnackbarItem[], action: SnackbarAction) =>
+    (state: SnackbarPayload[], action: SnackbarAction) =>
       snackbarReducer(state, action, maxSnackbars),
     []
   );
+
   const instanceId = useRef(Date.now());
 
   useEffect(() => {
@@ -82,7 +84,6 @@ const Provider: React.FC<SnackbarProviderProps> = ({
     // Setup event listener
     eventEmitter.setActive(true);
     const unsubscribe = eventEmitter.subscribe(newSnackbar => {
-      console.log('EVENT | newSnackbar adding paylod:', newSnackbar);
       dispatch({ type: 'ADD_SNACKBAR', payload: newSnackbar });
     });
 
@@ -111,24 +112,26 @@ const Provider: React.FC<SnackbarProviderProps> = ({
     [transitionType, anchorOrigin.vertical, anchorOrigin.horizontal]
   );
 
-  const enqueueSnackbar = useCallback(
-    ({
-      message,
-      severity = 'info',
-      duration = 5000,
-      preventDuplicate = true,
-    }: SnackbarConfig): void => {
-      const payload = {
-        id: Date.now(),
-        message,
-        severity,
-        duration,
+  const enqueueSnackbar:EnqueueSnackbar = useCallback(
+    (message, options=DEFAULT_OPTIONS) => {
+      const id = Date.now();
+      const payload: SnackbarPayload = {
+        id: id,
         open: true,
-        preventDuplicate: preventDuplicate,
+        message,
+        severity: options.severity,
+        duration: options.duration,
+        preventDuplicate: options.preventDuplicate,
       };
+
+      if(maxSnackbars === snackbars.length){
+        handleClose(snackbars[0].id)();
+      }
+
       dispatch({ type: 'ADD_SNACKBAR', payload });
+
     },
-    []
+    [maxSnackbars, snackbars.length]
   );
 
   return (
@@ -158,7 +161,7 @@ const Provider: React.FC<SnackbarProviderProps> = ({
                     position: 'static',
                   },
                   pointerEvents: 'auto',
-                  transition: 'all 0.08s ease-in-out',
+                  transition: 'all 0.1s ease-in-out',
                   [anchorOrigin.vertical]: `${index * SNACKBAR_SPACING +
                     24}px !important`,
                 }}
@@ -172,7 +175,7 @@ const Provider: React.FC<SnackbarProviderProps> = ({
                   }}
                   icon={icon === true ? undefined : icon}
                 >
-                  {"+"+snackbar.message}
+                  {snackbar.message+"00000000000"}
                 </Alert>
               </Snackbar>
             ))}
@@ -185,4 +188,4 @@ const Provider: React.FC<SnackbarProviderProps> = ({
   );
 };
 
-export const SnackbarProvider = memo(Provider);
+export const SnackbarProvider: React.FC<SnackbarProviderProps> = memo(Provider);
