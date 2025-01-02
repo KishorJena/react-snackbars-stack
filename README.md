@@ -1,6 +1,6 @@
 # React Snackbars Stack
 <p align="center">
-  <img src="assets/Frame 5.png" alt="logo"/>
+  <img src="assets/banner.webp" alt="logo"/>
   <br/>
   <img alt="CI Status" src="https://github.com/KishorJena/react-snackbars-stack/actions/workflows/main.yml/badge.svg">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/react-snackbars-stack">
@@ -105,7 +105,7 @@ export default SnackbarProvider;
 
 ## Screenshot
 
-![screenshot](assets/screenshot.png)
+![screenshot](assets/screenshot.webp)
 
 ## API
 
