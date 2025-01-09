@@ -130,7 +130,7 @@ The `SnackbarProvider` component is used to wrap your application and provide th
 | autoHideDuration | number  | Duration to auto-hide the snackbar   | 3000    |
 | icon             | boolean | Hide the icon in the snackbar        | true    |
 | theme            | string  | Theme of the snackbar ('dark' or 'light') | 'light' |
-| anchorOrigin     | object  | Position of the snackbar             | { vertical: 'bottom', horizontal: 'left' } |
+| anchorOrigin     | object  | Position of the snackbar                  | { vertical: 'bottom', horizontal: 'left' } |
 | transitionType   | string  | Transition type for the snackbar ('slide', 'grow', 'fade', 'zoom') | 'slide' |
 
 ## TODO
