@@ -4,8 +4,9 @@
   <br/>
   <img alt="CI Status" src="https://github.com/KishorJena/react-snackbars-stack/actions/workflows/main.yml/badge.svg">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/react-snackbars-stack">
-  <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/heyKSR">
-
+  <a href="https://x.com/heyKSR" target="_blank">
+    <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/heyKSR">
+  </a>
   <p align="center">React Snackbars Stack to show multiple snackbars as queue/stack</p>
 </p>
 
